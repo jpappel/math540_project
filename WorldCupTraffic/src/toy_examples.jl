@@ -7,7 +7,7 @@ function two_node(cs,N, init_conds, bondary_conds, tspan=(0.0,1.0))
     function coupled_transport!()
     end
 
-    prob = ODEProblem(..., init_conds, tspan, p)
+    prob = ODEProblem(init_conds, tspan, p)
 end
 
 
