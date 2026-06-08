@@ -45,7 +45,7 @@ function coupled_transport!(dP, P, params, t)
         dPv[1] = -(cv(0,t,total_P,Av,Au) * Pv[1] - cu(ns[1]*dxu,t,total_P,Au,Av) * Pu[end]) * inv_dxv
     else
         dPu[1] = -(cu(0,t,total_P,Au,Av) * Pu[1] - cv(ns[2]*dxv,t,total_P,Av,Au) * Pv[end]) * inv_dxu + boundary_conds[1](t)
-        dPv[1] = -(cv(0,t,total_P,Av,Au) * Pv[1] - cu(ns[1]*dxu,t,total_P,Au,Av) * Pu[end]) * inv_dxv + boundary_conds[1](t)
+        dPv[1] = -(cv(0,t,total_P,Av,Au) * Pv[1] - cu(ns[1]*dxu,t,total_P,Au,Av) * Pu[end]) * inv_dxv + boundary_conds[2](t)
     end
 end
 
@@ -104,49 +104,47 @@ function TwoNodePlot(ns, Ls, Pu, Pv;title="Two Node System")
 end
 
 function TwoNodeAnim(sol, ns, Ls; max_frames=300)
-    n_frames = length(sol.t)
-
-    if n_frames > max_frames
-        step = ceil(Int, n_frames / max_frames)
-        indicies = 1:step:n_frames
-    else
-        indicies = 1:n_frames
-    end
-    times = sol.t[indicies]
-
-    all_Puv = [@view sol.u[k][1:ns[1]] for k in indicies]
-    all_Pvu = [@view sol.u[k][ns[1]+1:ns[1]+ns[2]] for k in indicies]
-
-    thetau = collect(LinRange(0, pi, ns[1]))
-    thetav = collect(LinRange(pi, 2*pi, ns[2]))
-
-    maxP = maximum(vcat(
-        [maximum(p) for p in all_Puv],
-        [maximum(p) for p in all_Pvu]
-    ))
-
-    # base plot to avoid expensive reallocs
-    plt = plot(
-        proj=:polar,
-        legend=:topright,
-        ylims=(0, maxP * 1.05),
-        title="t=$(round(sol.t[1], digits=2))"
-    )
-    plot!(plt, thetau, all_Puv[1], label="uv")
-    plot!(plt, thetav, all_Pvu[1], label="vu")
-
-    anim = @animate for k in 1:length(times)
-        # Update data (faster than recreating)
-        plt.series_list[1][:y] = all_Puv[k]
-        plt.series_list[2][:y] = all_Pvu[k]
-        title!(plt, "t=$(round(times[k], digits=2))")
-        plt
-    end
-
-    return anim
+    # n_frames = length(sol.t)
+    #
+    # if n_frames > max_frames
+    #     step = ceil(Int, n_frames / max_frames)
+    #     indicies = 1:step:n_frames
+    # else
+    #     indicies = 1:n_frames
+    # end
+    # times = sol.t[indicies]
+    #
+    # all_Puv = [@view sol.u[k][1:ns[1]] for k in indicies]
+    # all_Pvu = [@view sol.u[k][ns[1]+1:ns[1]+ns[2]] for k in indicies]
+    #
+    # thetau = collect(LinRange(0, pi, ns[1]))
+    # thetav = collect(LinRange(pi, 2*pi, ns[2]))
+    #
+    # maxP = maximum(vcat(
+    #     [maximum(p) for p in all_Puv],
+    #     [maximum(p) for p in all_Pvu]
+    # ))
+    #
+    # # base plot to avoid expensive reallocs
+    # plt = plot(
+    #     proj=:polar,
+    #     legend=:topright,
+    #     ylims=(0, maxP * 1.05),
+    #     title="t=$(round(sol.t[1], digits=2))"
+    # )
+    # plot!(plt, thetau, all_Puv[1], label="uv")
+    # plot!(plt, thetav, all_Pvu[1], label="vu")
+    #
+    # anim = @animate for k in 1:length(times)
+    #     # Update data (faster than recreating)
+    #     plt.series_list[1][:y] = all_Puv[k]
+    #     plt.series_list[2][:y] = all_Pvu[k]
+    #     title!(plt, "t=$(round(times[k], digits=2))")
+    #     plt
+    # end
+    #
+    # return anim
 end
-
-
 
 function SoccerGame(t1)
     time = 0;
