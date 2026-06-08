@@ -98,6 +98,13 @@ function FourNodeArcAnim(
     #
 
     reference_paths = [
+        # straight line
+        [Point2f(t*node_pos[r][1]+(1-t)*node_pos[s][1], t*node_pos[r][2]+(1-t)*node_pos[s][2]) for t in LinRange(0,1,Nx)]
+        for (k, (s,r)) in enumerate(edges) 
+    ]
+    
+    #=
+    reference_paths = [
         directed_arc(
             node_pos[s],
             node_pos[t],
@@ -106,6 +113,7 @@ function FourNodeArcAnim(
         )
         for (k,(s,t)) in enumerate(edges)
     ]
+    =#
 
     reference_normals =
         curve_normals.(reference_paths)

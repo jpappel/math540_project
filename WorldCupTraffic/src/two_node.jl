@@ -146,10 +146,10 @@ function TwoNodeAnim(sol, ns, Ls;
     times = sol.t[indicies]
 
     filter_range=[1:ns[1], ns[1]+1:ns[1]+ns[2]]
-    if isnothing(filter_u[1])
+    if !isnothing(filter_u[1])
         filter_range[1] = filter_u[1]
     end
-    if isnothing(filter_u[2])
+    if !isnothing(filter_u[2])
         filter_range[2] = filter_u[2]
     end
 
@@ -207,10 +207,10 @@ function TwoNodeArcAnim(
     end
 
     filter_range=[1:ns[1], ns[1]+1:ns[1]+ns[2]]
-    if isnothing(filter_u[1])
+    if !isnothing(filter_u[1])
         filter_range[1] = filter_u[1]
     end
-    if isnothing(filter_u[2])
+    if !isnothing(filter_u[2])
         filter_range[2] = filter_u[2]
     end
 
