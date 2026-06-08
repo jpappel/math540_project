@@ -9,4 +9,10 @@
 
 ## 4 node system
 
+* expanded on the 2 node system
+* integrates examples of true sink and true source nodes
+* uses diagraphs in the 2 node system
+* implements attraction of nodes
+* shows how time can be used as a variable to affect any state
+
 ## high density system
