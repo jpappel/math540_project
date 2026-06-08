@@ -5,12 +5,16 @@ authors = ["JP Appel <jeanpierre.appel01@gmail.com>"]
 
 [deps]
 DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 GLMakie = "e9467ef8-e4e7-5192-8a1a-b1aee30e663a"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 
 [compat]
 DifferentialEquations = "8.0.0"
+Distributions = "0.25.126"
 GLMakie = "0.13.11"
+LinearAlgebra = "1.12.0"
 Makie = "0.24.11"
 Plots = "1.41.6"

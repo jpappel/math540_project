@@ -1,5 +1,7 @@
 module WorldCupTraffic
 
-include("toy_examples.jl")
-include("animations.jl")
+include("two_node.jl")
+include("multi_node.jl")
+include("game.jl")
+include("graphs.jl")
 end # module WorldCupTraffic
